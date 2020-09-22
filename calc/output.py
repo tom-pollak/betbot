@@ -10,6 +10,8 @@ def output_odds(sites):
             for i in range(3):
                 odd = game['odds'][i]
                 team = get_team(i)
+                if odd == 9999:
+                    odd = ''
                 if 'stakes' in game:
                     stake = game['stakes'][i]
                     print('%s: %s - %s    ' % (team, odd, stake), end='')

@@ -2,14 +2,15 @@ from .scraper import get_html, convert_odds
 
 URLS = [
     'https://sports.coral.co.uk/competitions/football/football-england/premier-league',
-    # 'https://sports.coral.co.uk/competitions/football/football-england/championship',
-    # 'https://sports.coral.co.uk/competitions/football/football-england/league-one',
-    # 'https://sports.coral.co.uk/competitions/football/football-spain/spanish-la-liga',
-    # 'https://sports.coral.co.uk/competitions/football/football-germany/german-bundesliga',
+    'https://sports.coral.co.uk/competitions/football/football-england/championship',
+    'https://sports.coral.co.uk/competitions/football/football-england/league-one',
+    'https://sports.coral.co.uk/competitions/football/football-spain/spanish-la-liga',
+    'https://sports.coral.co.uk/competitions/football/football-germany/german-bundesliga',
 ]
 
 
 def scrape_coral():
+    print('Scraping coral...')
     games = []
     headers = {
         'User-Agent':

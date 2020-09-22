@@ -30,7 +30,6 @@ def scrape_365():
     print('Scraping bet365...')
     api = ApiBet365()
     games = scrape_api(api)
-    print('bet365', games)
     return games
 
 

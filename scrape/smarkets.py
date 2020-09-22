@@ -7,9 +7,9 @@ URLS = [
     'https://smarkets.com/listing/sport/football/england-league-2',
     'https://smarkets.com/listing/sport/football/spain-la-liga',
     'https://smarkets.com/listing/sport/football/spain-la-liga-2',
-    'https://smarkets.com/listing/sport/football/germany-bundesliga'
+    'https://smarkets.com/listing/sport/football/germany-bundesliga',
     'https://smarkets.com/listing/sport/football/france-ligue-1',
-    'https://smarkets.com/listing/sport/football/france-ligue-2',
+    # 'https://smarkets.com/listing/sport/football/france-ligue-2',
     'https://smarkets.com/listing/sport/football/italy-serie-a',
 ]
 
@@ -41,7 +41,8 @@ def get_odds(url):
                     game_stakes.append(str(stake[0].getText().replace('£',
                                                                       '')))
                 else:
-                    return False
+                    game_odds.append(9999)
+                    game_stakes.append(0)
             game = {
                 'teams': game_names, 'odds': game_odds, 'stakes': game_stakes
             }
