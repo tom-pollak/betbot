@@ -1,7 +1,7 @@
 import sys
 from bs4 import BeautifulSoup
 from urllib.request import urlopen, Request
-from urllib.error import HTTPError
+from urllib.error import HTTPError, URLError
 from socket import timeout
 
 
@@ -24,6 +24,8 @@ def get_html(
     except HTTPError as e:
         print('%s - ERROR: Status Code %s' % (url, e.code))
         return None
+    except URLError as e:
+        print('%s - ERROR: %s' % (url, e))
     except timeout as e:
         print('%s - Socket timed out' % url)
         return None

@@ -19,6 +19,7 @@ def scrape():
     bookies['bet365'] = bet_365_games
 
     coral_games = scrape_coral()
+    print(coral_games)
     bookies['coral'] = coral_games
 
     # hill_games = scrape_hill()

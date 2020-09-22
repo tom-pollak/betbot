@@ -41,8 +41,8 @@ def get_odds(url):
                     game_stakes.append(str(stake[0].getText().replace('£',
                                                                       '')))
                 else:
-                    game_odds.append(9999)
-                    game_stakes.append(0)
+                    game_odds.append('9999')
+                    game_stakes.append('0')
             game = {
                 'teams': game_names, 'odds': game_odds, 'stakes': game_stakes
             }
@@ -55,25 +55,17 @@ def scrape_smarkets():
     print('Scraping smarkets...')
     games = []
     for url in URLS:
-
-        retry = True
         count = 0
-        while retry and count < 5:
-            league_games = get_odds(url)
+        retry = True
+        while retry:
             retry = False
-            if not league_games:
-                pass
-                print('%s - Games not found, skipping...' % url)
-            else:
-                if '\xa0' in league_games[0]['odds']:
-                    count += 1
-                    retry = True
-                    # print('%s - Odds not found, retrying...' % url)
-        if league_games and count < 5:
-            games += league_games
-        elif not league_games:
-            pass
-        else:
-            pass
-            print('%s - Tried 5 times, skipping...' % url)
+            league_games = get_odds(url)
+            for game in league_games:
+                for odd in game['odds']:
+                    if odd == '\xa0':
+                        retry = True
+                    elif odd == '':
+                        print('odds are empty')
+                        odd = '9999'
+        games += league_games
     return games
