@@ -10,8 +10,13 @@ def output_odds(sites):
             for i in range(3):
                 odd = game['odds'][i]
                 team = get_team(i)
-                print('%s: %s    ' % (team, odd), end='')
+                if 'stakes' in game:
+                    stake = game['stakes'][i]
+                    print('%s: %s - %s    ' % (team, odd, stake), end='')
+                else:
+                    print('%s: %s    ' % (team, odd), end='')
             print('\n\n')
+    print()
 
 
 def get_team(i):

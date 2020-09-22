@@ -2,10 +2,10 @@ from .scraper import get_html, convert_odds
 
 URLS = [
     'https://sports.coral.co.uk/competitions/football/football-england/premier-league',
-    'https://sports.coral.co.uk/competitions/football/football-england/championship',
-    'https://sports.coral.co.uk/competitions/football/football-england/league-one',
-    'https://sports.coral.co.uk/competitions/football/football-spain/spanish-la-liga',
-    'https://sports.coral.co.uk/competitions/football/football-germany/german-bundesliga',
+    # 'https://sports.coral.co.uk/competitions/football/football-england/championship',
+    # 'https://sports.coral.co.uk/competitions/football/football-england/league-one',
+    # 'https://sports.coral.co.uk/competitions/football/football-spain/spanish-la-liga',
+    # 'https://sports.coral.co.uk/competitions/football/football-germany/german-bundesliga',
 ]
 
 
@@ -21,6 +21,7 @@ def scrape_coral():
             content_divs = soup.find_all('div',
                                          attrs={'class': 'odds-content'})
             for div in content_divs:
+                # print(div)
                 game_name = div.find_all(
                     'span', attrs={'class': 'odds-names-opponent-name'})
 
@@ -30,10 +31,10 @@ def scrape_coral():
                 odds = []
                 for name in game_name:
                     teams.append(name.getText())
-                    # print('%s v %s' % (teams[0], teams[1]))
+                # print('%s v %s' % (teams[0], teams[1]))
 
                 for i in range(3):
-                    print('frac odd %s' % game_odds[i].getText)
+                    # print('frac odd %s' % game_odds[i].getText())
                     odd = convert_odds(game_odds[i].getText())
                     odds.append(odd)
 

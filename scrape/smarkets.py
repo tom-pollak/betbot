@@ -4,8 +4,13 @@ URLS = [
     'https://smarkets.com/listing/sport/football/england-premier-league',
     'https://smarkets.com/listing/sport/football/england-championship',
     'https://smarkets.com/listing/sport/football/england-league-1',
+    'https://smarkets.com/listing/sport/football/england-league-2',
     'https://smarkets.com/listing/sport/football/spain-la-liga',
+    'https://smarkets.com/listing/sport/football/spain-la-liga-2',
     'https://smarkets.com/listing/sport/football/germany-bundesliga'
+    'https://smarkets.com/listing/sport/football/france-ligue-1',
+    'https://smarkets.com/listing/sport/football/france-ligue-2',
+    'https://smarkets.com/listing/sport/football/italy-serie-a',
 ]
 
 
@@ -37,13 +42,16 @@ def get_odds(url):
                                                                       '')))
                 else:
                     return False
-            game = {'teams': game_names, 'odds': game_odds}
+            game = {
+                'teams': game_names, 'odds': game_odds, 'stakes': game_stakes
+            }
             games.append(game)
 
     return games
 
 
 def scrape_smarkets():
+    print('Scraping smarkets...')
     games = []
     for url in URLS:
 
@@ -53,16 +61,18 @@ def scrape_smarkets():
             league_games = get_odds(url)
             retry = False
             if not league_games:
+                pass
                 print('%s - Games not found, skipping...' % url)
             else:
                 if '\xa0' in league_games[0]['odds']:
                     count += 1
                     retry = True
-                    print('%s - Odds not found, retrying...' % url)
+                    # print('%s - Odds not found, retrying...' % url)
         if league_games and count < 5:
             games += league_games
         elif not league_games:
-            print('%s - Site not found' % url)
+            pass
         else:
+            pass
             print('%s - Tried 5 times, skipping...' % url)
     return games

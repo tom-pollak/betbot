@@ -18,7 +18,7 @@ def get_html(
     }):
 
     try:
-        print('%s - Scraping...' % url)
+        # print('%s - Scraping...' % url)
         res = Request(url=url, headers=headers)
         html = urlopen(res, timeout=5).read()
     except HTTPError as e:
@@ -30,7 +30,3 @@ def get_html(
 
     soup = BeautifulSoup(html, 'html.parser')
     return soup
-
-
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
