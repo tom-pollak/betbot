@@ -9,6 +9,7 @@ def find_arbitrage(bookies, match_name):
                 odd1 = [bookies[bookie][i], bookie, i]
                 odd2, odd3 = get_other_bookies_arbitrage_odds(bookies, bookie, i)
                 if 9999 not in [odd1[0], odd2[0], odd3[0]]:
+                    print(odd1, odd2, odd3)
                     if float(1 / odd1[0] + 1 / odd2[0] +
                              1 / odd3[0]) < float(1):
                         output_arbitrage(match_name, odd1, odd2, odd3)
@@ -17,7 +18,6 @@ def find_arbitrage(bookies, match_name):
 
 
 def output_arbitrage(match_name, *odds):
-    print(odds)
     odds = sorted(odds, key=lambda x: x[2])
     print('Arbitrage match found! %s' % match_name)
     for odd in odds:
@@ -31,14 +31,14 @@ def get_other_bookies_arbitrage_odds(bookies, mas_bookie, i):
         odd = 9999
         if i != j:
             for bookie in bookies:
-                if bookie not in [mas_bookie, 'smarkets']:
+                if bookie != 'smarkets':
                     if bookies[bookie][j] < odd:
                         odd = bookies[bookie][j]
             odds = odds + ([odd, bookie, j], )
-            # temporary
-            for odd in odds:
-                if 9999 in odd:
-                    print(odds)
+    # temporary
+    # for odd in odds:
+    #     if 9999 in odd:
+    #         print(bookies)
     return odds
 
 

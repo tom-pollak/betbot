@@ -21,14 +21,15 @@ def get_html(
         # print('%s - Scraping...' % url)
         res = Request(url=url, headers=headers)
         html = urlopen(res, timeout=5).read()
+        soup = BeautifulSoup(html, 'html.parser')
+        return soup
     except HTTPError as e:
         print('%s - ERROR: Status Code %s' % (url, e.code))
         return None
     except URLError as e:
         print('%s - ERROR: %s' % (url, e))
+        return None
     except timeout as e:
         print('%s - Socket timed out' % url)
         return None
-
-    soup = BeautifulSoup(html, 'html.parser')
-    return soup
+    return None

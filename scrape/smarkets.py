@@ -14,7 +14,7 @@ URLS = [
 ]
 
 
-def get_odds(url):
+def get_odds(url, bet_or_lay='bid'):
     soup = get_html(url)
     games = []
     if soup:
@@ -32,11 +32,12 @@ def get_odds(url):
             for name in game_name:
                 game_names.append(name.getText())
 
-            offer = div.find_all('span', attrs={'class': 'bid'})
+            offer = div.find_all('span', attrs={'class': bet_or_lay})
             for off in offer:
                 odd = off.find_all('span', attrs={'class': 'price'})
                 stake = off.find_all('span', attrs={'class': 'stake'})
                 if odd:
+                    print(odd)
                     game_odds.append(str(odd[0].getText()))
                     game_stakes.append(str(stake[0].getText().replace('£',
                                                                       '')))
@@ -47,19 +48,18 @@ def get_odds(url):
                 'teams': game_names, 'odds': game_odds, 'stakes': game_stakes
             }
             games.append(game)
-
     return games
 
 
-def scrape_smarkets():
+def scrape_smarkets(bet_or_lay='bid'):
     print('Scraping smarkets...')
     games = []
     for url in URLS:
         count = 0
         retry = True
-        while retry:
+        while retry and count < 5:
             retry = False
-            league_games = get_odds(url)
+            league_games = get_odds(url, bet_or_lay)
             for game in league_games:
                 for odd in game['odds']:
                     if odd == '\xa0':
@@ -67,5 +67,9 @@ def scrape_smarkets():
                     elif odd == '':
                         print('odds are empty')
                         odd = '9999'
+            count += 1
+            print('retrying', url)
+        print(league_games)
+        print(game)
         games += league_games
     return games

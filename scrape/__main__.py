@@ -9,6 +9,9 @@ def scrape():
     smarkets_games = scrape_smarkets()
     bookies['smarkets'] = smarkets_games
 
+    smarket_bet_games = scrape_smarkets('offer')
+    bookies['smarket_bet'] = smarket_bet_games
+
     sport_888_games = scrape_888()
     bookies['888sport'] = sport_888_games
 
@@ -25,4 +28,5 @@ def scrape():
     # hill_games = scrape_hill()
     # bookies['williamhill'] = hill_games
 
+    print(bookies)
     return bookies
