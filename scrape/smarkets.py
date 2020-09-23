@@ -37,7 +37,6 @@ def get_odds(url, bet_or_lay='bid'):
                 odd = off.find_all('span', attrs={'class': 'price'})
                 stake = off.find_all('span', attrs={'class': 'stake'})
                 if odd:
-                    print(odd)
                     game_odds.append(str(odd[0].getText()))
                     game_stakes.append(str(stake[0].getText().replace('£',
                                                                       '')))
@@ -69,7 +68,5 @@ def scrape_smarkets(bet_or_lay='bid'):
                         odd = '9999'
             count += 1
             print('retrying', url)
-        print(league_games)
-        print(game)
         games += league_games
     return games

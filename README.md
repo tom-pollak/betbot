@@ -6,6 +6,10 @@ odds scraper for arbitrage bets
 
 smarkets works well, however coral scraping is dodgy and odds are unreliable
 
+**edit** smarkets has modified its website the day after I started scraping
+their website and adds a delay before showing their odds so all odds come
+back as empty :(
+
 uses 888sport bet365 unibet api through [soccerapi](https://github.com/S1M0N38/soccerapi).
 
 bet365 is locked due to region I think.
